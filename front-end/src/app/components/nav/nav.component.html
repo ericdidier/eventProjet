@@ -1,0 +1,22 @@
+<nav>
+  <ul>
+    <li>
+      <a href="#" routerLink="/">Home</a>
+    </li>
+  </ul>
+  <ul>
+    <ng-container *ngIf="!connectedUser">
+      <li>
+        <a href="#" routerLink="/signup">Sign up</a>
+      </li>
+      <li>
+        <a href="#" routerLink="/login">Log in</a>
+      </li>
+    </ng-container>
+    <ng-container *ngIf="connectedUser">
+      <li>
+        <a href="#" (click)="logout()">Logout ({{connectedUser.username}})</a>
+      </li>
+    </ng-container>
+  </ul>
+</nav>
