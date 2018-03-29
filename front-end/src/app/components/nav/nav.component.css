@@ -1,7 +1,9 @@
 nav {
   display: flex;
   justify-content: space-between;
-  background: darkslategrey;
+  background: #64686D;
+  line-height: 5em;
+  margin-bottom: 10px;
 }
 
 nav > ul {

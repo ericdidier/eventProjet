@@ -11,6 +11,7 @@ import { LoginComponent } from './components/login/login.component';
 import {AuthService} from "./services/auth.service";
 import {AuthInterceptor} from "./services/auth.interceptor";
 import {AdminService} from "./services/admin.service";
+import { MainFooterComponent } from './components/main-footer/main-footer.component';
 
 const routes: Route[] = [
   {
@@ -28,7 +29,8 @@ const routes: Route[] = [
     AppComponent,
     HomeComponent,
     NavComponent,
-    LoginComponent
+    LoginComponent,
+    MainFooterComponent
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,6 @@
 package be.formation.backend.config;
 
+import be.formation.backend.enums.RoleEnum;
 import be.formation.backend.service.UserService;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
@@ -16,8 +17,8 @@ public class DbInit implements InitializingBean {
     @Override
     public void afterPropertiesSet() throws Exception {
 
-        userService.register("user", "user", false);
-        userService.register("toto", "toto", false);
-        userService.register("admin", "admin", true);
+        userService.register("user", "user", RoleEnum.USER);
+        userService.register("toto", "toto", RoleEnum.USER);
+        userService.register("admin", "admin", RoleEnum.ADMIN);
     }
 }

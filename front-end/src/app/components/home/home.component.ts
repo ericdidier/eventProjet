@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AdminService} from "../../services/admin.service";
 import {User} from "../../models/user";
 import {AuthService} from "../../services/auth.service";
+import {NavComponent} from "../nav/nav.component";
 
 @Component({
   selector: 'app-home',
@@ -31,9 +32,19 @@ export class HomeComponent implements OnInit {
     );
   }
 
+  get isVisitor(): boolean {
+    return this.user == null;
+  }
+
+  get isUser(): boolean {
+    return this.user != null
+      && this.user.authorities.filter(a => a.authority === 'ROLE_USER').length > 0;
+  }
+
   get isAdmin(): boolean {
     return this.user != null
       && this.user.authorities.filter(a => a.authority === 'ROLE_ADMIN').length > 0;
   }
+
 
 }

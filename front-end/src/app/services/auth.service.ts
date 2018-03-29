@@ -24,6 +24,9 @@ export class AuthService {
     );
   }
 
+  /**
+   * qui suis-je ?
+   */
   public whoAmI(): void {
 
     if (localStorage.getItem('token') != null){

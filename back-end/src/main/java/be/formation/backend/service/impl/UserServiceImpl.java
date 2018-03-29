@@ -30,16 +30,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User register(String username, String password, boolean isAdmin) {
+    public User register(String username, String password, RoleEnum whoAmI) {
 
         User user = new User();
         user.setUsername(username);
         user.setPassword(passwordEncoder.encode(password));
-        user.setAuthorities(new ArrayList<>(Collections.singletonList(createOrGetAuthority(RoleEnum.USER.getValue()))));
 
-        if(isAdmin){
-            user.getAuthorities().add(createOrGetAuthority(RoleEnum.ADMIN.getValue()));
+        switch (whoAmI.getValue()) {
+            case "ROLE_USER":
+                user.setAuthorities(new ArrayList<>(Collections.singletonList(createOrGetAuthority(RoleEnum.USER.getValue()))));
+            case "ROLE_ADMIN":
+                user.getAuthorities().add(createOrGetAuthority(RoleEnum.ADMIN.getValue()));
+            case "ROLE_WORKER":
+                user.getAuthorities().add(createOrGetAuthority(RoleEnum.WORKER.getValue()));
         }
+
 
         user.setAccountNonExpired(true);
         user.setAccountNonLocked(true);
