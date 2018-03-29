@@ -93,10 +93,19 @@ body{
   background:#cccccc;
   color:#333333;
 }
-
 .breadcrumb a{
   color:#333333;
 }
+
+/* Breadcrumb1 */
+.breadcrumb1{
+  background:#cccccc;
+  color:#333333;
+}
+.breadcrumb1 a{
+  color:#333333;
+}
+
 
 /* Progress Bars */
 .progress-bar{
@@ -109,15 +118,6 @@ body{
 }
 
 #login{
-  margin-top:30px;
-}
-
-/* Footer */
-#footer{
-  background:#333333;
-  color:#ffffff;
-  text-align:center;
-  padding:30px;
   margin-top:30px;
 }
 
@@ -142,6 +142,6 @@ body{
     margin-bottom: 0px;
   }
   .well{
-    margin-top: 23px;
+    margin-top: 15px
   }
 }
