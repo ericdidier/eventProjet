@@ -27,7 +27,7 @@ public class Booking extends  BaseEntity {
     @OneToMany(mappedBy = "booking")
     private List<Ticket> tickets;
 
-    @ManyToOne
+    @ManyToOne (cascade = {CascadeType.REMOVE})
     private Event event;
 
     public Booking() {

@@ -6,7 +6,7 @@ import javax.persistence.ManyToOne;
 import java.util.UUID;
 
 /**
- *  classe qui permet de definir
+ *  classe qui permet de definir type de ticket
  */
 @Entity
 public class Ticket extends   BaseEntity{
