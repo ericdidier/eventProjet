@@ -58,10 +58,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
                 .authorizeRequests()
-                .antMatchers("/api/user/**").hasRole("USER")
-                .antMatchers("/api/admin/**").hasRole("ADMIN")
-                .antMatchers("/api/admin/**").hasRole("WORKER")
+                .antMatchers("/api/user/**").hasAnyRole("USER", "ADMIN", "WORKER")
+                .antMatchers("/api/admin/**").hasAnyRole("ADMIN", "WORKER")
                 .antMatchers("/api/**").permitAll()
+                .antMatchers("/**").permitAll()
                 .anyRequest().authenticated()
                 .and().exceptionHandling()
                 .authenticationEntryPoint((request, response, e) -> response.sendError(401))
@@ -69,6 +69,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilter(new JwtAuthenticationFilter(authenticationManager(), secret))
                 .addFilter(new JwtAuthorizationFilter(authenticationManager(), secret))
                 .csrf().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+        .and().headers().frameOptions().disable();
     }
 }

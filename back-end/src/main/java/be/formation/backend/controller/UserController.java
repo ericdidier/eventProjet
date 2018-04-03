@@ -1,5 +1,6 @@
 package be.formation.backend.controller;
 
+import be.formation.backend.enums.RoleEnum;
 import be.formation.backend.model.dto.UserFormDTO;
 import be.formation.backend.model.entity.User;
 import be.formation.backend.service.UserService;
@@ -25,7 +26,7 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity register(@RequestBody UserFormDTO userFormDTO) {
-        User created = userService.register(userFormDTO.username, userFormDTO.password, false);
+        User created = userService.register(userFormDTO.username, userFormDTO.password, RoleEnum.USER);
         return ResponseEntity.created(URI.create("/api/users/" + created.getId())).body(created);
     }
 

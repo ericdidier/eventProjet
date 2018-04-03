@@ -39,10 +39,15 @@ public class UserServiceImpl implements UserService {
         switch (whoAmI.getValue()) {
             case "ROLE_USER":
                 user.setAuthorities(new ArrayList<>(Collections.singletonList(createOrGetAuthority(RoleEnum.USER.getValue()))));
+                break;
             case "ROLE_ADMIN":
+                user.setAuthorities(new ArrayList<>());
                 user.getAuthorities().add(createOrGetAuthority(RoleEnum.ADMIN.getValue()));
+                break;
             case "ROLE_WORKER":
+                user.setAuthorities(new ArrayList<>());
                 user.getAuthorities().add(createOrGetAuthority(RoleEnum.WORKER.getValue()));
+                break;
         }
 
 

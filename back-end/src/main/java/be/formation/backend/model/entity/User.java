@@ -2,10 +2,7 @@ package be.formation.backend.model.entity;
 
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.util.List;
 
 /**
@@ -23,6 +20,9 @@ public class User extends BaseEntity implements UserDetails {
 
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Authority> authorities;
+
+    @OneToMany(mappedBy = "user")
+    private List<Booking> bookings;
 
     @Column(nullable = false)
     private boolean accountNonLocked;
@@ -97,5 +97,13 @@ public class User extends BaseEntity implements UserDetails {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public List<Booking> getBookings() {
+        return bookings;
+    }
+
+    public void setBookings(List<Booking> bookings) {
+        this.bookings = bookings;
     }
 }
