@@ -1,141 +1,83 @@
-form {
-  padding: 1em;
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans:100,300,400,600,700');
+
+.login{
+  font-family: 'Josefin Sans', sans-serif;
+  background: #f4f4f4;
+  padding:70px 0px;
+  margin-bottom: 10px;
 }
 
-input {
-  padding: 0.5em;
-  margin: 0.5em;
-}
-body{
-  background:#f4f4f4;
-}
-
-/* Navbar */
-.navbar{
-  min-height: 33px !important;
-  margin-bottom:0;
-  border-radius:0;
-}
-
-.navbar-nav > li > a, .navbar-brand{
-  padding-top:6px !important;
-  padding-bottom:0 !important;
-  height: 33px;
-}
-
-.navbar-default {
-  background-color: #e74c3c;
-  border-color: #c0392b;
-}
-.navbar-default .navbar-brand {
-  color: #ecf0f1;
-}
-.navbar-default .navbar-brand:hover,
-.navbar-default .navbar-brand:focus {
-  color: #ffbbbc;
-}
-.navbar-default .navbar-text {
-  color: #ecf0f1;
-}
-.navbar-default .navbar-nav > li > a {
-  color: #ecf0f1;
-}
-.navbar-default .navbar-nav > li > a:hover,
-.navbar-default .navbar-nav > li > a:focus {
-  color: #ffbbbc;
-}
-.navbar-default .navbar-nav > .active > a,
-.navbar-default .navbar-nav > .active > a:hover,
-.navbar-default .navbar-nav > .active > a:focus {
-  color: #ffbbbc;
-  background-color: #c0392b;
-}
-.navbar-default .navbar-nav > .open > a,
-.navbar-default .navbar-nav > .open > a:hover,
-.navbar-default .navbar-nav > .open > a:focus {
-  color: #ffbbbc;
-  background-color: #c0392b;
-}
-.navbar-default .navbar-toggle {
-  border-color: #c0392b;
-}
-.navbar-default .navbar-toggle:hover,
-.navbar-default .navbar-toggle:focus {
-  background-color: #c0392b;
-}
-.navbar-default .navbar-toggle .icon-bar {
-  background-color: #ecf0f1;
-}
-.navbar-default .navbar-collapse,
-.navbar-default .navbar-form {
-  border-color: #ecf0f1;
-}
-.navbar-default .navbar-link {
-  color: #ecf0f1;
-}
-.navbar-default .navbar-link:hover {
-  color: #ffbbbc;
-}
-
-
-/* Header */
-#header{
-  background:#333333;
-  color:#ffffff;
-  padding-bottom: 10px;
-  margin-bottom: 15px;
-}
-
-#header .create{
-  padding-top: 20px;
-}
-
-/* Breadcrumb */
-.breadcrumb{
-  background:#cccccc;
-  color:#333333;
-}
-
-.breadcrumb a{
-  color:#333333;
-}
-
-/* Progress Bars */
-.progress-bar{
-  background:#333333;
-  color:#ffffff;
-}
-
-.dash-box{
+h1{
+  font-weight:600;
+  font-family: 'Josefin Sans', sans-serif;
+  text-transform:capitalize;
   text-align:center;
+  color:#FFF;
+  background:#72d6f5;
+  padding:25px 0px;
 }
 
-#login{
-  margin-top:30px;
+form{
+  padding:80px;
 }
 
-/* Footer */
-#footer{
-  background:#333333;
-  color:#ffffff;
+.inner-form{
+  background:#FFF;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.4);
+}
+
+label{
+  font-weight:400;
+  font-size:15px;
+}
+
+.form-control {
+  background-color: #f5f5f5;
+  box-shadow: none;
+  color: #565656;
+  font-size:14px;
+  padding:30px 10px;
+  margin-bottom:30px;
+  border: 1px solid #f1f1f1;
+}
+
+.btn{
+  background: #72d6f5;
+  color: #FFF;
+  border-radius: 6px;
+  margin: 0 auto;
+  height: 48px;
+  line-height: 38px;
+  display: table;
+  font-size: 15px;
+  width: 100%;
+}
+
+.btn:hover{
+  background:#FFF;
+  border:2px solid #24acb3;
+}
+
+.forgot{
   text-align:center;
-  padding:30px;
   margin-top:30px;
+  font-size:16px;
+}
+
+input[type=text], input[type=password], input[type=email] {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #72d6f5;
+  border-radius: 0;
+  width: 100%;
+  margin: 0 0 30px 0;
+  padding: 0;
+  box-shadow: none;
 }
 
 
-@media (max-width: 767px) {
-  .navbar-default .navbar-nav .open .dropdown-menu > li > a {
-    color: #ecf0f1;
-  }
-  .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
-  .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
-    color: #ffbbbc;
-  }
-  .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
-  .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
-  .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
-    color: #ffbbbc;
-    background-color: #c0392b;
-  }
+input[type=text]:focus, input[type=password]:focus, input[type=email]:focus {
+  box-shadow: none;
+  border-bottom: 1px solid #6eafc4;
 }
+
