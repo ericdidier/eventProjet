@@ -40,7 +40,7 @@ public class VenueServiceImpl implements VenueService {
         Venue venue2 = new Venue();
         LOGGER.info("update a venue entry by using information: {}", id);
         Optional<Venue> venue1 = venueRepository.findById(id);
-        if (venue != null) {
+        if (venue1.isPresent()) {
             venue2 = venue1.get();
             venue2.setId(id);
             venue2.setCity(venue.getCity());
@@ -52,7 +52,21 @@ public class VenueServiceImpl implements VenueService {
             LOGGER.info("the object does not exist, entry by using information: => ", id);
             return venue2;
         }
-
         return venue2;
+    }
+
+    @Override
+    public boolean deleteVenue(long id) {
+        boolean found = false;
+        LOGGER.info("Delete a venue entry by using information : {}", id);
+        Venue venue = venueRepository.findById(id).get();
+        if (venue != null && found) {
+            venueRepository.delete(venue);
+            found = true;
+            LOGGER.info("deleted a new venue entry: {}", id);
+        } else {
+            LOGGER.info("Unable to delete. venue with id {} not found", id) ;
+        }
+        return  found;
     }
 }

@@ -11,8 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.URI;
-
 @RestController
 @RequestMapping("/api")
 public class VenueController {
@@ -26,7 +24,6 @@ public class VenueController {
 
     @PostMapping("/registreVenue")
     public VenueDTO register(@RequestBody VenueDTO venueDTO) {
-        VenueDTO venueDTO1 = new VenueDTO();
         LOG.info("creating new user: {}", venueDTO);
         Venue created = venueService.registerVenue(venueDTO.name, venueDTO.city);
         return VenueMapper.EntityToDto(created);
@@ -39,7 +36,6 @@ public class VenueController {
         VenueDTO venueDTO1 = new VenueDTO();
 
         LOG.info("updating venue: {}", venueDTOInput.name + " " + venueDTOInput.city);
-
         venue1.setName(venueDTOInput.getName());
         venue1.setCity(venueDTOInput.getCity());
         Venue currentVenue = venueService.UpdateVenue(Long.valueOf(id), venue1);
@@ -52,9 +48,16 @@ public class VenueController {
         return venueDTO1;
     }
 
+    @DeleteMapping("/deleteVenue/{id}")
+    public ResponseEntity<Void>  deleteVenue(@PathVariable(value = "id") Long venueId) {
+       boolean foundDelete =  venueService.deleteVenue(venueId);
+        if (foundDelete == false ){
+            LOG.info("Unable to delete. User with id {} not found", venueId);
+            return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+        }
 
-
-
+        return new ResponseEntity<Void>(HttpStatus.OK);
+    }
 
 
 }
