@@ -31,7 +31,7 @@ public class VenueController {
 
 
     @PutMapping("/modifyVenue/{id}")
-    public VenueDTO update(@PathVariable("id") int id, @RequestBody VenueDTO venueDTOInput) {
+    public VenueDTO updateVenue(@PathVariable("id") int id, @RequestBody VenueDTO venueDTOInput) {
         Venue venue1 = new Venue();
         VenueDTO venueDTO1 = new VenueDTO();
 
