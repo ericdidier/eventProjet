@@ -5,7 +5,19 @@ import be.formation.backend.model.entity.Venue;
 
 import java.util.Optional;
 
+/**
+ * Transformation entre le modèle des entités JPA et les objets DTO .
+ *
+ */
 public class VenueMapper {
+
+
+    /**
+     * Transforme une entité JPA {@link Venue} en objet TDO {@link VenueDTO}.
+     *
+     * @param Objet venueDTO
+     * @return
+     */
     public static Venue dtoToEntity(VenueDTO venueDTO) {
         if (venueDTO == null) {
             throw new IllegalArgumentException(" objet venueDTO  ne peut pas être null ");
@@ -17,6 +29,12 @@ public class VenueMapper {
     }
 
 
+    /**
+     * Transforme une entité JPA {@link Venue} en objet TDO {@link VenueDTO}.
+     *
+     * @param venue
+     * @return objet TDO
+     */
     public static VenueDTO EntityToDto(Venue venue) {
         if (venue == null) {
             throw new IllegalArgumentException(" venue  ne peut pas être null ");

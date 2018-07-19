@@ -24,7 +24,7 @@ public class VenueController {
 
     @PostMapping("/registreVenue")
     public VenueDTO register(@RequestBody VenueDTO venueDTO) {
-        LOG.info("creating new user: {}", venueDTO);
+        LOG.info("creating new venue: {}", venueDTO);
         Venue created = venueService.registerVenue(venueDTO.name, venueDTO.city);
         return VenueMapper.EntityToDto(created);
     }
@@ -50,13 +50,12 @@ public class VenueController {
 
     @DeleteMapping("/deleteVenue/{id}")
     public ResponseEntity<Void>  deleteVenue(@PathVariable(value = "id") Long venueId) {
-       boolean foundDelete =  venueService.deleteVenue(venueId);
-        if (foundDelete == false ){
-            LOG.info("Unable to delete. User with id {} not found", venueId);
+        if ( venueService.deleteVenue(venueId)){
+            return new ResponseEntity<Void>(HttpStatus.OK);
+        } else {
+            LOG.info("Unable to delete. venue with id {} not found", venueId);
             return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
         }
-
-        return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
 

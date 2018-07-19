@@ -5,17 +5,20 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import java.util.List;
 
+/**
+ * Permet de definir un Artist
+ */
 @Entity
-public class Artist extends BaseEntity  {
+public class Artist extends BaseEntity {
 
     private String name;
 
-    private  String description ;
+    private String description;
 
     private String imageUrl;
 
-    @ManyToMany(mappedBy="artists")
-    private List<Event>  events;
+    @ManyToMany(mappedBy = "artists")
+    private List<Event> events;
 
     public String getName() {
         return name;
