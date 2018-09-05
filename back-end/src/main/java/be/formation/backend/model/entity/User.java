@@ -18,7 +18,7 @@ public class User extends BaseEntity implements UserDetails {
     @Column(nullable = false)
     private String password;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER) // EAGER c-à-d à chaque fois vous charge user vous chargerai aussi se Role
     private List<Authority> authorities;
 
     @OneToMany(mappedBy = "user")

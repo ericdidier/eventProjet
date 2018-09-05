@@ -9,6 +9,12 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * C'est une classe qui permet de se connecter à la bd pour charge l'utilisateur.
+ * On rédefini une methode loadUserByUsername
+ * qui reçoit un username et returnUserDetails
+ *
+ */
 @Primary
 @Service
 @Transactional

@@ -43,8 +43,9 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     }
 
     /**
+     *
      * <br/> Effectue l'authentification réelle (Au moment ou l'utilisateur tente des authentifier)
-     * <br/>
+     * <br/> recupere username+passWord sous forme d'objet Authentication
      *
      * @param request
      * @param response <br/>
@@ -66,9 +67,13 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
      * <br/> Comportement par défaut pour une authentification réussie.
      * <br/> genere le token , le temps d'expiration de ce token  et qui sera signé(certifier) par code secret.
      *
+     * <br/>  les etapes : call build JWt en lui donnant le claims quon fait (le role)
+     * <br/>  associe à une date d'expiration et un mot de passe
+     * <br/>  dans la reponse http on va add une entete Appelé "Authorization", et 1 prefixe "Bearer" + le token
+     * <br/>
      * @param request
      * @param response
-     * @param chain
+     * @param chain Objet qui accompagne sringSecurity
      * @param authResult l'objet renvoyé par la méthode attemptAuthentication .
      * @throws IOException
      * @throws ServletException
@@ -82,7 +87,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                         .stream()
                         .map(GrantedAuthority::getAuthority)
                         .collect(Collectors.toList()))
-                .setExpiration(new Date(System.currentTimeMillis() + 864000000))
+                .setExpiration(new Date(System.currentTimeMillis() + 964000000))
                 .signWith(SignatureAlgorithm.HS512, secret.getBytes())
                 .compact();
 

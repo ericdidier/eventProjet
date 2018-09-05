@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 /**
  *    <br>
  *    <p>  Classe qui va intervenir pour chaque requete donc ( Demande une resource necessitant l'autgentification)
- *    <br/>   a chaque fois  vous envoyer une reqeute ce filtre va analayse cette requête.</p>
+ *    <br/>   a chaque fois  vous envoyez une reqeute ce filtre va analayse cette requête.</p>
  *    <br/>
  */
 public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
@@ -31,6 +31,17 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
         this.secret = secret;
     }
 
+    /**
+     * </br>
+     * </br>   Permet d'intervenir (verifier) si le token est correct ou pas  pour donner acces aux donnnées
+     * </br>
+     *
+     * @param request
+     * @param response
+     * @param chain
+     * @throws IOException
+     * @throws ServletException
+     */
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
 
