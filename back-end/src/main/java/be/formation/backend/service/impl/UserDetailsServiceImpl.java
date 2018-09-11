@@ -18,6 +18,11 @@ import org.springframework.transaction.annotation.Transactional;
 @Primary
 @Service
 @Transactional
+/**
+ * <br> Cette class contient qui implemente interface UserDetailsService ,
+ * <br> va etre appeler par defaut par spring pour charge un utilisateur  via un service
+ *
+ */
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     private final UserRepository userRepository;
@@ -32,7 +37,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         User found = userRepository.findByUsername(username);
 
         if (found == null) {
-            throw new UsernameNotFoundException("Username not found");
+            throw new UsernameNotFoundException("Username not found"); // Exception il est fourni par Spring
         }
 
         return found;

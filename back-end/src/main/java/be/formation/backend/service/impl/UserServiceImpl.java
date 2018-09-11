@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService {
         User user = new User();
         user.setUsername(username);
         user.setPassword(passwordEncoder.encode(password));
-
+        // ajouté de(s) role(e)s à un utilisateur.
         switch (whoAmI.getValue()) {
             case "ROLE_USER":
                 user.setAuthorities(new ArrayList<>(Collections.singletonList(createOrGetAuthority(RoleEnum.USER.getValue()))));

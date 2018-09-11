@@ -56,7 +56,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
 
         try {
-            UserFormDTO dto = new ObjectMapper().readValue(request.getInputStream(), UserFormDTO.class);
+            UserFormDTO dto = new ObjectMapper().readValue(request.getInputStream(), UserFormDTO.class); // request.getInputStream() = contenue de la requete, UserFormDTO.class= serialise desaserailisatio en ce type objet
             return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(dto.username, dto.password, Collections.emptyList()));
         } catch (IOException e) {
             throw new RuntimeException();
@@ -82,13 +82,13 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
 
         String token = Jwts.builder()
-                .setSubject(((User) authResult.getPrincipal()).getUsername())
+                .setSubject(((User) authResult.getPrincipal()).getUsername()) // cest quoi le sujet de token, je recupere username grace à l'ojet Authentication
                 .claim("authorities", authResult.getAuthorities()
                         .stream()
                         .map(GrantedAuthority::getAuthority)
-                        .collect(Collectors.toList()))
-                .setExpiration(new Date(System.currentTimeMillis() + 964000000))
-                .signWith(SignatureAlgorithm.HS512, secret.getBytes())
+                        .collect(Collectors.toList())) // comme claims son nom est "authorities"  je recupere le role
+                .setExpiration(new Date(System.currentTimeMillis() + 964000000)) //delait expiration
+                .signWith(SignatureAlgorithm.HS512, secret.getBytes()) // Je vais signe se token avec le mot de passe HS512 + le mot de passe
                 .compact();
 
         response.addHeader("Authorization", "Bearer " + token);

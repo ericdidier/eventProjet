@@ -1,8 +1,11 @@
 package be.formation.backend.filter;
 
+
 import be.formation.backend.model.entity.Authority;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,14 +20,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- *    <br>
- *    <p>  Classe qui va intervenir pour chaque requete donc ( Demande une resource necessitant l'autgentification)
- *    <br/>   a chaque fois  vous envoyez une reqeute ce filtre va analayse cette requête.</p>
+ *    <br/>
+ *    <p>  Classe qui va intervenir pour chaque requete dont ( toute Demande une resource necessitant l'autgentification)
+ *    <br/> a chaque fois  vous envoyez une reqeute ce filtre va analayse cette requête.</p>
  *    <br/>
  */
 public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
     private final String secret;
+    private final Logger LOG = LoggerFactory.getLogger(JwtAuthorizationFilter.class);
 
     public JwtAuthorizationFilter(AuthenticationManager authenticationManager, String secret) {
         super(authenticationManager);
@@ -46,13 +50,14 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
 
         String header = request.getHeader("Authorization");
-        if (header == null || !header.startsWith("Bearer ")) {
+        LOG.info("token reçu : "+ header);
+        if (header == null || !header.startsWith("Bearer ")) { // on verifier si le token est null ou ne contient pas le prefix defini je quitte
             chain.doFilter(request, response);
             return;
         }
 
         UsernamePasswordAuthenticationToken authentication = getAuthentication(header);
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+        SecurityContextHolder.getContext().setAuthentication(authentication); // dans le context de security de spring je vais charge utilisateur authentifier
         chain.doFilter(request, response);
     }
 
@@ -61,12 +66,12 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
         Claims claims = Jwts.parser()
                 .setSigningKey(secret.getBytes())
                 .parseClaimsJws(header.replace("Bearer ", ""))
-                .getBody();
+                .getBody();// il me recupere le contenu de mon token
 
-        String username = claims.getSubject();
-        List<String> authorities = claims.get("authorities", List.class);
+        String username = claims.getSubject();// recupere username
+        List<String> authorities = claims.get("authorities", List.class);//  je les roles qui a été cupèré à partir de mon token
 
-        List<Authority> auths = authorities.stream().map(Authority::new).collect(Collectors.toList());
+        List<Authority> auths = authorities.stream().map(Authority::new).collect(Collectors.toList());// je le parcour pour le recupe chaque role
         return new UsernamePasswordAuthenticationToken(username, null, auths);
     }
 }

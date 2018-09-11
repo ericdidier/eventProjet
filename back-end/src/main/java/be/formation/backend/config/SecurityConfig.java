@@ -69,7 +69,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilter(new JwtAuthenticationFilter(authenticationManager(), secret))
                 .addFilter(new JwtAuthorizationFilter(authenticationManager(), secret))
                 .csrf().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // important permet de desactive la session.
         .and().headers().frameOptions().disable();
     }
 }
